@@ -36,7 +36,10 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user=Auth::user();
-        if($user->hasAnyRole([RolesEnum::Admin->value,RolesEnum::Commenter->value])){
+
+
+        if($user->hasAnyRole([RolesEnum::Admin,RolesEnum::Commenter])){
+          
            return Inertia::location(route('filament.admin.pages.dashboard'));
         }
         else{
